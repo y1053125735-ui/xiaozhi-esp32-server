@@ -1,0 +1,20 @@
+$kind: http-request
+url: "{{base_url}}/api/v1/ask"
+method: POST
+body:
+  type: formdata
+  content:
+    - type: text
+      key: input_type
+      value: text
+    - type: text
+      key: output_type
+      value: text
+    - type: text
+      key: text
+      value: 你好，小智
+    - type: text
+      key: session_id
+      value: test-session-001
+      disabled: true
+order: 2000

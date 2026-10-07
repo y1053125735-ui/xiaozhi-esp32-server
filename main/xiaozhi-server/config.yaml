@@ -660,7 +660,7 @@ LLM:
     # 可在这里找到你的api key https://bigmodel.cn/usercenter/proj-mgmt/apikeys
     model_name: glm-4-flash
     url: https://open.bigmodel.cn/api/paas/v4/
-    api_key: 你的chat-glm web key
+    api_key: bade8e0dded1423b885f9a4f07e3a9c8.x5vamWBqYgPMrNaL
   OllamaLLM:
     # 定义LLM API类型
     type: ollama

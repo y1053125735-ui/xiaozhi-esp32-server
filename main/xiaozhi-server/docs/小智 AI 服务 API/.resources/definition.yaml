@@ -1,0 +1,11 @@
+$kind: collection
+description: 提供 ASR、LLM、TTS 一体化服务
+variables:
+  base_url: http://localhost:8004
+  api_key: 7b1ac41e7d4e4ae0babbed34e89812a4
+auth:
+  - id: 51d4e782-53d8-4e26-aff8-f207d765c964
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{api_key}}"

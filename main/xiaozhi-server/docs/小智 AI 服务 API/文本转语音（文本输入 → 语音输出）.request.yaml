@@ -1,0 +1,19 @@
+$kind: http-request
+url: "{{base_url}}/api/v1/ask"
+method: POST
+body:
+  type: formdata
+  content:
+    - type: text
+      key: input_type
+      value: text
+    - type: text
+      key: output_type
+      value: audio
+    - type: text
+      key: text
+      value: 讲个笑话
+    - type: text
+      key: audio_format
+      value: wav
+order: 4000

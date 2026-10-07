@@ -8,11 +8,11 @@ import asyncio
 import requests
 import subprocess
 import numpy as np
-import opuslib_next
 from io import BytesIO
 from core.utils import p3
 from pydub import AudioSegment
 from typing import Callable, Any
+
 
 TAG = __name__
 
@@ -269,6 +269,8 @@ async def audio_to_data(
             return cached_result
 
     def _sync_audio_to_data():
+        def _sync_audio_to_data():
+            import opuslib_next
         # 获取文件后缀名
         file_type = os.path.splitext(audio_file_path)[1]
         if file_type:
@@ -356,6 +358,7 @@ def pcm_to_data_stream(raw_data, is_opus=True, callback: Callable[[Any], Any] = 
     """
     using_temp_encoder = False
     if is_opus and opus_encoder is None:
+        import opuslib_next
         encoder = opuslib_next.Encoder(sample_rate, 1, opuslib_next.APPLICATION_AUDIO)
         using_temp_encoder = True
 
@@ -392,7 +395,9 @@ def opus_datas_to_wav_bytes(opus_datas, sample_rate=16000, channels=1):
     """
     将opus帧列表解码为wav字节流
     """
+    import opuslib_next
     decoder = opuslib_next.Decoder(sample_rate, channels)
+
     try:
         pcm_datas = []
 

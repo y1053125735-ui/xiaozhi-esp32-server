@@ -50,12 +50,21 @@ def setup_logging(config=None):
     """从配置文件中读取日志配置，并设置日志输出格式和级别"""
     if config is None:
         check_config_file()
-        # 先查缓存，避免在 async 上下文中重复 await load_config
         config = cache_manager.get(CacheType.CONFIG, "main_config")
         if config is None:
-            # 缓存也没有（理论上不该发生），才走 asyncio.run
-            config = asyncio.run(load_config())
+            config = _load_config_sync()
     log_config = config["log"]
+
+# def setup_logging(config=None):
+#     """从配置文件中读取日志配置，并设置日志输出格式和级别"""
+#     if config is None:
+#         check_config_file()
+#         # 先查缓存，避免在 async 上下文中重复 await load_config
+#         config = cache_manager.get(CacheType.CONFIG, "main_config")
+#         if config is None:
+#             # 缓存也没有（理论上不该发生），才走 asyncio.run
+#             config = asyncio.run(load_config())
+#     log_config = config["log"]
     global _logger_initialized
 
     # 第一次初始化时配置日志

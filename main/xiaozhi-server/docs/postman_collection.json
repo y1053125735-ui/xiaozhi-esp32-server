@@ -1,0 +1,99 @@
+{
+	"info": {
+		"name": "小智 AI 服务 API",
+		"description": "提供 ASR、LLM、TTS 一体化服务",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{api_key}}",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8004"
+		},
+		{
+			"key": "api_key",
+			"value": "你的API Key"
+		}
+	],
+	"item": [
+		{
+			"name": "健康检查",
+			"request": {
+				"method": "GET",
+				"url": "{{base_url}}/health"
+			}
+		},
+		{
+			"name": "文本问答",
+			"request": {
+				"method": "POST",
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{ "key": "input_type", "value": "text" },
+						{ "key": "output_type", "value": "text" },
+						{ "key": "text", "value": "你好，小智" }
+					]
+				},
+				"url": "{{base_url}}/api/v1/ask"
+			}
+		},
+		{
+			"name": "语音输入转文本",
+			"request": {
+				"method": "POST",
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{ "key": "input_type", "value": "audio" },
+						{ "key": "output_type", "value": "text" },
+						{ "key": "audio", "type": "file", "src": "test.wav" },
+						{ "key": "audio_format", "value": "wav" }
+					]
+				},
+				"url": "{{base_url}}/api/v1/ask"
+			}
+		},
+		{
+			"name": "文本转语音输出",
+			"request": {
+				"method": "POST",
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{ "key": "input_type", "value": "text" },
+						{ "key": "output_type", "value": "audio" },
+						{ "key": "text", "value": "讲个笑话" },
+						{ "key": "audio_format", "value": "wav" }
+					]
+				},
+				"url": "{{base_url}}/api/v1/ask"
+			}
+		},
+		{
+			"name": "语音输入转语音输出",
+			"request": {
+				"method": "POST",
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{ "key": "input_type", "value": "audio" },
+						{ "key": "output_type", "value": "audio" },
+						{ "key": "audio", "type": "file", "src": "test.wav" },
+						{ "key": "audio_format", "value": "wav" }
+					]
+				},
+				"url": "{{base_url}}/api/v1/ask"
+			}
+		}
+	]
+}

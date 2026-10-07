@@ -11,6 +11,14 @@ from core.websocket_server import WebSocketServer
 from core.utils.util import check_ffmpeg_installed
 from core.utils.gc_manager import get_gc_manager
 
+#conda activate xiaozhi-server
+#cd D:\Programming\Python\PythonProjects\xiaozhi-esp32-server\main\xiaozhi-server
+#python app.py
+
+#conda activate xiaozhi-server
+#cd D:\Programming\Python\PythonProjects\xiaozhi-esp32-server\main\digital-human
+#python start.py
+
 TAG = __name__
 logger = setup_logging()
 

@@ -1,0 +1,7 @@
+# Use this workspace to collaborate
+workspace:
+  id: ""
+
+localResources:
+  collections:
+    - ../docs/小智 AI 服务 API

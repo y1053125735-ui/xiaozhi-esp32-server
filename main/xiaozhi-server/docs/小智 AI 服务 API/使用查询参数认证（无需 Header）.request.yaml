@@ -1,0 +1,18 @@
+$kind: http-request
+url: "{{base_url}}/api/v1/ask?api_key={{api_key}}"
+method: POST
+queryParams:
+  api_key: "{{api_key}}"
+body:
+  type: formdata
+  content:
+    - type: text
+      key: input_type
+      value: text
+    - type: text
+      key: output_type
+      value: text
+    - type: text
+      key: text
+      value: 你好
+order: 6000
