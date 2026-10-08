@@ -113,13 +113,6 @@ INFO:     Waiting for application startup.
 - Swagger UI: http://localhost:8004/docs
 - ReDoc: http://localhost:8004/redoc
 
-
-
-### 访问文档
-
-- Swagger UI: http://localhost:8004/docs
-- ReDoc: http://localhost:8004/redoc
-
 ## 接口说明
 
 ### POST /api/v1/ask
