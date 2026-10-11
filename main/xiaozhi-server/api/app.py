@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from api.routes import ask, health, asr, tts
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
 from config.config_loader import load_config
@@ -59,3 +60,5 @@ async def shutdown_event():
 
 app.include_router(health.router, tags=["健康检查"])
 app.include_router(ask.router, prefix="/api/v1", tags=["问答接口"])
+app.include_router(asr.router, prefix="/api/v1", tags=["ASR 语音识别"])
+app.include_router(tts.router, prefix="/api/v1", tags=["TTS 语音合成"])

@@ -27,3 +27,29 @@ class AskResponse(BaseModel):
         default=None,
         description="额外消息（如错误信息）",
     )
+
+
+class ASRResponse(BaseModel):
+    status: ResponseType = Field(
+        default=ResponseType.SUCCESS,
+        description="响应状态",
+    )
+    text: Optional[str] = Field(
+        default=None,
+        description="识别出的文本内容",
+    )
+    message: Optional[str] = Field(
+        default=None,
+        description="额外消息（如错误信息）",
+    )
+
+
+class TTSResponse(BaseModel):
+    status: ResponseType = Field(
+        default=ResponseType.SUCCESS,
+        description="响应状态",
+    )
+    message: Optional[str] = Field(
+        default=None,
+        description="额外消息（如错误信息）",
+    )

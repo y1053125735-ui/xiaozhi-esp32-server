@@ -7,6 +7,7 @@ from api.schemas.request import InputType, OutputType
 from api.schemas.response import AskResponse, ResponseType
 from api.auth import verify_api_key
 
+
 TAG = __name__
 router = APIRouter(dependencies=[Depends(verify_api_key)])
 
@@ -49,18 +50,33 @@ async def ask(
 
         elif input_type == InputType.AUDIO:
             if not audio:
-                raise HTTPException(status_code=400, detail="语音输入时 audio 文件必填")
-            audio_data = await audio.read()
-            user_text = await service_container.asr_service.transcribe(
-                audio_data, audio_format
-            )
-            if not user_text:
-                return AskResponse(
-                    status=ResponseType.ERROR,
-                    output_type=output_type.value,
-                    session_id=session_id,
-                    message="语音识别失败",
+                if text:
+                    logger.bind(tag=TAG).info("未检测到音源输入，自动降级为文本模式")
+                    user_text = text
+                else:
+                    return AskResponse(
+                        status=ResponseType.ERROR,
+                        output_type=output_type.value,
+                        session_id=session_id,
+                        message="未检测到音源输入，请上传音频文件或切换到文本输入",
+                    )
+            else:
+                audio_data = await audio.read()
+                user_text = await service_container.asr_service.transcribe(
+                    audio_data, audio_format
                 )
+                if not user_text:
+                    if text:
+                        logger.bind(tag=TAG).info("语音识别失败，自动降级为文本模式")
+                        user_text = text
+                    else:
+                        return AskResponse(
+                            status=ResponseType.ERROR,
+                            output_type=output_type.value,
+                            session_id=session_id,
+                            message="语音识别失败，且无文本兜底，请重试或提供 text 参数",
+                        )
+
         else:
             raise HTTPException(status_code=400, detail=f"不支持的输入类型: {input_type}")
 

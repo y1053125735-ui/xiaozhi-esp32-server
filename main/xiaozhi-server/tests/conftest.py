@@ -330,6 +330,9 @@ def _install_mock_layer() -> None:
         try:
             import httpx as _httpx  # noqa: F401
 
+            _httpx._original_Client = _httpx.Client
+            _httpx._original_AsyncClient = _httpx.AsyncClient
+
             class _FakeAsyncClient:
                 def __init__(self, *args, **kwargs):
                     pass
